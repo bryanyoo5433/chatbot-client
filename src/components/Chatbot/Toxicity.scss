@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+.toxicity-check{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .second-page h1 {
+    color: rgb(70, 70, 70);
+  }
+  .third-page .chat-response{
+    background-color: rgb(70, 70, 70);
+    border-radius: 10px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    margin-bottom: 1.5rem;
+    .chat-title {
+      color: rgb(180, 180, 180);
+      font-weight: bold;
+    }
+  }
+  .box {
+    background-color: rgb(70, 70, 70);
+    height: calc(100vh - 100px);
+    max-height: 500px;
+    width: 350px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    .type-box {
+      width: 100%;
+      input {
+        display: block;
+        width: 100%;
+      }
+    }
+   
+  }
+  ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+      border-radius: 10px;
+    }
+      
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background-color: rgb(70, 70, 70); 
+      border-radius: 10px;
+      transition: .3s ease background-color;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: crimson; 
+      
+    }
+}
+.toxicity-check .submit {
+  display: inline;
+}
+.toxicity-check .submit .disabled {
+  opacity: 0.3;
+  cursor: auto;
+}
+.toxicity-check .message {
+  display: inline;
+}
+.toxicity-check .message button {
+  cursor: auto;
+}
+.toxicity-check .message .notpass {
+  color: crimson;
+  padding: 7px 14px;
+  margin-left: 1.5rem;
+  background-color: rgb(70, 70, 70);
+  border-radius: 10px;
+  font-size: 18px;
+}
+.toxicity-check .message .pass {
+  color: green;
+  padding: 7px 14px;
+  margin-left: 1.5rem;
+  background-color: rgb(70, 70, 70);
+  border-radius: 10px;
+  font-size: 18px;
+}
+.toxicity-check .submit button {
+    color: white;
+    background-color: rgb(70, 70, 70);
+    margin-top: 0.5rem;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 7px 14px;
+}
+.toxicity-check .text-title {
+    color: rgb(70, 70, 70);
+    margin-bottom: 1.5rem;
+    font-family: 'Monserrat', sans-serif;
+}

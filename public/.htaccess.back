@@ -1,0 +1,2 @@
+RewriteCond %{HTTP_HOST} ^(www\.)?robolink\.com$ [NC]
+RewriteRule ^blog/ /404.php [L,R=404]
