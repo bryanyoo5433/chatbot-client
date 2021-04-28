@@ -121,9 +121,6 @@ const submit_text = () => {
             <span className="chat-title">Chatbot:</span> &nbsp;
             <span>{response}</span>
           </div>
-          <div className="submit">
-            <button className={isToxic ? "disabled": ""} onClick={isToxic ? null: submit_text}>Submit</button>
-          </div>
           <div className="message">
             { isToxic && (
               <button className="notpass">You cannot submit this.</button>
@@ -132,9 +129,10 @@ const submit_text = () => {
               <button className="pass">You can submit this.</button>
             )}
           </div>
-          <div className="type-box">
-            <input id="text" onChange={check}/>
-          </div>
+          
+          <input id="text" />
+          
+          <button className={isToxic ? "disabled": ""} onClick={isToxic ? null: submit_text}>Submit</button>
         </div>
       )} 
     </div>

@@ -25,15 +25,10 @@
     height: calc(100vh - 100px);
     max-height: 500px;
     width: 350px;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    .type-box {
-      width: 100%;
-      input {
-        display: block;
-        width: 100%;
-      }
+    
+    input {
+      width: 80%;
+      min-height: 33px;
     }
    
   }
@@ -56,7 +51,8 @@
     }
 }
 .toxicity-check .submit {
-  display: inline;
+  display: flex;
+  justify-content: flex-end;
 }
 .toxicity-check .submit .disabled {
   opacity: 0.3;
@@ -70,11 +66,11 @@
 }
 .toxicity-check .message .notpass {
   color: crimson;
-  padding: 7px 14px;
-  margin-left: 1.5rem;
   background-color: rgb(70, 70, 70);
-  border-radius: 10px;
   font-size: 18px;
+  width: 100%;
+  padding: 0px;
+  border: none;
 }
 .toxicity-check .message .pass {
   color: green;
@@ -84,13 +80,12 @@
   border-radius: 10px;
   font-size: 18px;
 }
-.toxicity-check .submit button {
+.toxicity-check button {
     color: white;
     background-color: rgb(70, 70, 70);
-    margin-top: 0.5rem;
     font-size: 18px;
-    border-radius: 10px;
-    padding: 7px 14px;
+    display: inline;
+    width: 20%;
 }
 .toxicity-check .text-title {
     color: rgb(70, 70, 70);
