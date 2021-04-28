@@ -30,6 +30,17 @@
       width: 80%;
       min-height: 33px;
     }
+
+    .conversation {
+      height: 95%;
+    }
+    .type-area {
+      display: flex;
+      flex-direction: column;
+      .send-message {
+        width: 100%;
+      }
+    }
    
   }
   ::-webkit-scrollbar-track {
@@ -59,7 +70,7 @@
   cursor: auto;
 }
 .toxicity-check .message {
-  display: inline;
+  
 }
 .toxicity-check .message button {
   cursor: auto;
@@ -74,11 +85,10 @@
 }
 .toxicity-check .message .pass {
   color: green;
-  padding: 7px 14px;
-  margin-left: 1.5rem;
   background-color: rgb(70, 70, 70);
-  border-radius: 10px;
   font-size: 18px;
+  width: 100%;
+  border: none;
 }
 .toxicity-check button {
     color: white;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import ReactGA from 'react-ga';
-
+import '@tensorflow/tfjs-backend-cpu';
 import * as toxicity from '@tensorflow-models/toxicity';
 import socketIOClient from "socket.io-client";
 import "./Toxicity.scss";
@@ -117,10 +117,14 @@ const submit_text = () => {
       )}
       { page === 4 && (
         <div className="box">
-          <div className="chat-response"> 
-            <span className="chat-title">Chatbot:</span> &nbsp;
-            <span>{response}</span>
+
+          <div className="conversation">
+            <div className="chat-response"> 
+              <span className="chat-title">Chatbot:</span> &nbsp;
+              <span>{response}</span>
+            </div>
           </div>
+
           <div className="message">
             { isToxic && (
               <button className="notpass">You cannot submit this.</button>
@@ -129,10 +133,15 @@ const submit_text = () => {
               <button className="pass">You can submit this.</button>
             )}
           </div>
-          
-          <input id="text" />
-          
-          <button className={isToxic ? "disabled": ""} onClick={isToxic ? null: submit_text}>Submit</button>
+
+          <div className="type-area">
+            <div className= "send-message">
+              <input id="text" onChange={check}/>
+              <button className={isToxic ? "disabled": ""} onClick={isToxic ? null: submit_text}>Submit</button>
+            </div>
+
+          </div>
+
         </div>
       )} 
     </div>
