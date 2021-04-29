@@ -11,6 +11,7 @@ const Chatbot = () => {
   const [ isToxic, setIsToxic ] = useState(true);
   const [text, setText ] = useState('');
   const [response, setResponse] = useState('Hello World!');
+  const [conversation, setConversation] = useState([{"from": "client", "message": "Hello! l;aksdj f;klajsd;lkfja sk;ldjf;lkasd jfk;lasdf"}, {"from": "server", "message": "Hello world! ajsk;dlfjask;ldfjaksldjf;klasjd;kflasd"}]);
 
   useEffect(() => {
     // ReactGA.initialize('UA-81850614-1');
@@ -54,10 +55,13 @@ const checkToxicity = (text) => {
   })
 }
 
-
 const submit_text = () => {
-  setPage(2);
+
   socket.emit("submit_text", text);
+  let data = {"from": "client", "message": text};
+  let newConversation = conversation;
+  newConversation.push(data);
+  setConversation(newConversation);
   socket.on('response', function(data) {
     console.log(data);
     setResponse(data);
@@ -119,10 +123,13 @@ const submit_text = () => {
         <div className="box">
 
           <div className="conversation">
-            <div className="chat-response"> 
-              <span className="chat-title">Chatbot:</span> &nbsp;
-              <span>{response}</span>
-            </div>
+            {conversation.map((c, i) => {
+              if(c.from === "client") {
+                  return <div className="client" key={i}><div className="client-text"> {c.message} </div></div>
+              } else {
+                  return <div className="server" key={i}><div className="server-text"> {c.message} </div></div>
+              }
+            })}
           </div>
 
           <div className="message">
