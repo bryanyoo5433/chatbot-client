@@ -55,9 +55,9 @@ const checkToxicity = (text) => {
 }
 
 const submit_text = () => {
-
+  let _text = addNewLine(text);
   socket.emit("submit_text", text);
-  let data = {"from": "client", "message": text};
+  let data = {"from": "client", "message": _text};
   let newConversation = conversation;
   newConversation.push(data);
   setConversation(newConversation);
@@ -71,22 +71,23 @@ const submit_text = () => {
 const addNewLine = (t) => {
   let text_array = t.split('');
   for (let i=0; i<text_array.length; i++) {
-    if (text_array[i].length > 18) {
+    if (text_array[i].length > 16) {
       let tmp = text_array[i].split("");
       let new_array= [];
 
-      while(tmp >= 18) {
+      while(tmp >= 16) {
         let tmp = text_array[i].split("");
         let new_array = [];
 
-        while(tmp.length >= 18) {
-          new_array.push(tmp.slice(0, 18).join(""));
-          tmp.splice(0, 18);
+        while(tmp.length >= 16) {
+          new_array.push(tmp.slice(0, 16).join(""));
+          tmp.splice(0, 16);
         }
         new_array.push(tmp.join(""));
         text_array.splice(i, 1, ...new_array);
       }
     }
+    return text_array.join(" ");
   }
 }
 
