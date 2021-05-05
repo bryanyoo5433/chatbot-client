@@ -22,7 +22,6 @@ const Chatbot = () => {
     //   setSubmittedEmail(true);
     // }
     // else {
-
     // }
   }, []);
 
@@ -69,6 +68,27 @@ const submit_text = () => {
   })
 }
 
+const addNewLine = (t) => {
+  let text_array = t.split('');
+  for (let i=0; i<text_array.length; i++) {
+    if (text_array[i].length > 18) {
+      let tmp = text_array[i].split("");
+      let new_array= [];
+
+      while(tmp >= 18) {
+        let tmp = text_array[i].split("");
+        let new_array = [];
+
+        while(tmp.length >= 18) {
+          new_array.push(tmp.slice(0, 18).join(""));
+          tmp.splice(0, 18);
+        }
+        new_array.push(tmp.join(""));
+        text_array.splice(i, 1, ...new_array);
+      }
+    }
+  }
+}
 
   return (
     <div className="toxicity-check">
