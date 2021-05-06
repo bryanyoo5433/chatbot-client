@@ -69,23 +69,19 @@ const submit_text = () => {
 }
 
 const addNewLine = (t) => {
-  let text_array = t.split('');
+  let text_array = t.split(' ');
   for (let i=0; i<text_array.length; i++) {
     if (text_array[i].length > 16) {
       let tmp = text_array[i].split("");
       let new_array= [];
-
-      while(tmp >= 16) {
-        let tmp = text_array[i].split("");
-        let new_array = [];
-
-        while(tmp.length >= 16) {
-          new_array.push(tmp.slice(0, 16).join(""));
-          tmp.splice(0, 16);
-        }
-        new_array.push(tmp.join(""));
-        text_array.splice(i, 1, ...new_array);
+      
+      while(tmp.length >= 16) {
+        new_array.push(tmp.slice(0, 16).join(""));
+        tmp.splice(0, 16);
       }
+      new_array.push(tmp.join(""));
+      text_array.splice(i, 1, ...new_array);
+      
     }
     return text_array.join(" ");
   }
