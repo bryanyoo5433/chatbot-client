@@ -61,6 +61,10 @@ const submit_text = () => {
   let newConversation = conversation;
   newConversation.push(data);
   setConversation(newConversation);
+
+  setText('')
+  document.getElementById("text").value = '';
+  
   socket.on('response', function(data) {
     console.log(data);
     setResponse(data);

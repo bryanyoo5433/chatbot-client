@@ -68,21 +68,25 @@
     }
    
   }
-  ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px whitesmoke; 
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track { 
       border-radius: 10px;
     }
       
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background-color: whitesmoke; 
+      background-color: rgb(41, 41, 41); 
       border-radius: 10px;
       transition: .3s ease background-color;
     }
     
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background-color: crimson; 
+      background-color: rgb(182, 182, 182); 
       
     }
 }
@@ -102,15 +106,15 @@
 }
 .toxicity-check .message .notpass {
   color: crimson;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(100, 100, 100);
   font-size: 18px;
   width: 100%;
   padding: 0px;
   border: none;
 }
 .toxicity-check .message .pass {
-  color: green;
-  background-color: rgb(70, 70, 70);
+  color: rgb(0, 209, 0);
+  background-color: rgb(100, 100, 100);
   font-size: 18px;
   width: 100%;
   border: none;
