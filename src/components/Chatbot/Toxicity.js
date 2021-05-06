@@ -35,6 +35,12 @@ const Chatbot = () => {
   //   }
   // }
 
+const onKeyPress = (e) => {
+  if(e.key === "Enter") {
+    e.preventDefault();
+    submit_text();
+  }
+}
 
 const check = (e) => {
   const sentence = e.target.value;
@@ -55,6 +61,9 @@ const checkToxicity = (text) => {
 }
 
 const submit_text = () => {
+  const regex = /^[a-zA-Z0-9+_-]/;
+  if(!regex.test(text)) return;
+
   let _text = addNewLine(text);
   socket.emit("submit_text", text);
   let data = {"from": "client", "message": _text};
@@ -64,7 +73,7 @@ const submit_text = () => {
 
   setText('')
   document.getElementById("text").value = '';
-  
+
   socket.on('response', function(data) {
     console.log(data);
     setResponse(data);
@@ -75,13 +84,13 @@ const submit_text = () => {
 const addNewLine = (t) => {
   let text_array = t.split(' ');
   for (let i=0; i<text_array.length; i++) {
-    if (text_array[i].length > 16) {
+    if (text_array[i].length > 12) {
       let tmp = text_array[i].split("");
       let new_array= [];
       
-      while(tmp.length >= 16) {
-        new_array.push(tmp.slice(0, 16).join(""));
-        tmp.splice(0, 16);
+      while(tmp.length >= 12) {
+        new_array.push(tmp.slice(0, 12).join(""));
+        tmp.splice(0, 12);
       }
       new_array.push(tmp.join(""));
       text_array.splice(i, 1, ...new_array);
@@ -164,7 +173,7 @@ const addNewLine = (t) => {
 
           <div className="type-area">
             <div className= "send-message">
-              <input id="text" onChange={check}/>
+              <input id="text" onChange={check} onKeyPress={onKeyPress}/>
               <button className={isToxic ? "disabled": ""} onClick={isToxic ? null: submit_text}>Submit</button>
             </div>
 
