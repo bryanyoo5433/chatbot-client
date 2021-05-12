@@ -5,7 +5,7 @@ import * as toxicity from '@tensorflow-models/toxicity';
 import socketIOClient from "socket.io-client";
 import "./Toxicity.scss";
 
-const socket = socketIOClient(window.location.protocol + "//" + window.location.hostname);
+const socket = socketIOClient(window.location.protocol + "//" + window.location.hostname + ":8080");
 const Chatbot = () => {
   const [ page, setPage ] = useState(4);
   const [ isToxic, setIsToxic ] = useState(true);
@@ -61,8 +61,13 @@ const checkToxicity = (text) => {
 }
 
 const submit_text = () => {
+  let t = text;
+  while (t.charAt(0) === ' ') {
+    t = t.substring(1);
+  }
+
   const regex = /^[a-zA-Z0-9+_-]/;
-  if(!regex.test(text)) return;
+  if(!regex.test(t)) return;
 
   let _text = addNewLine(text);
   socket.emit("submit_text", text);
@@ -74,9 +79,13 @@ const submit_text = () => {
   setText('')
   document.getElementById("text").value = '';
 
-  socket.on('response', function(data) {
-    console.log(data);
-    setResponse(data);
+  socket.on('response', function(response) {
+    let new_data = addNewLine(response)
+    let data = {"from": "server", "message": new_data};
+    let newConversation = conversation;
+    newConversation.push(data);
+    setConversation(newConversation);
+    setResponse(new_data);
     setPage(3);
   })
 }

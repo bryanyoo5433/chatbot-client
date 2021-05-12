@@ -75,13 +75,15 @@
 
   ::-webkit-scrollbar-track { 
       border-radius: 10px;
+      transition: color .3s ease
+      
     }
       
     /* Handle */
     ::-webkit-scrollbar-thumb {
       background-color: rgb(41, 41, 41); 
       border-radius: 10px;
-      transition: .3s ease background-color;
+      transition: color .3s ease
     }
     
     /* Handle on hover */
