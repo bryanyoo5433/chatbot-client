@@ -81,14 +81,14 @@
       
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background-color: rgb(41, 41, 41); 
+      background-color: rgb(182, 182, 182); 
       border-radius: 10px;
       transition: color .3s ease
     }
     
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background-color: rgb(182, 182, 182); 
+      background-color: rgb(202, 202, 202); 
       
     }
 }

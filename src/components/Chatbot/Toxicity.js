@@ -6,6 +6,8 @@ import socketIOClient from "socket.io-client";
 import "./Toxicity.scss";
 
 const socket = socketIOClient(window.location.protocol + "//" + window.location.hostname + ":8080");
+let model;
+
 const Chatbot = () => {
   const [ page, setPage ] = useState(4);
   const [ isToxic, setIsToxic ] = useState(true);
@@ -23,6 +25,8 @@ const Chatbot = () => {
     // }
     // else {
     // }
+    loadingModel();
+
     socket.on('response', function(response) {
       let new_data = addNewLine(response)
       let data = {"from": "server", "message": new_data};
@@ -32,6 +36,12 @@ const Chatbot = () => {
     
     })
   }, []);
+
+  const loadingModel = async() => {
+    const threshold = 0.9;
+    model = await toxicity.load(threshold);
+    console.log(model);
+  }
 
   // const handleSubmitEmail = () => {
   //   setLoadFormTimes(loadFormTimes + 1);
@@ -53,24 +63,26 @@ const onKeyPress = (e) => {
 const check = (e) => {
   const sentence = e.target.value;
   setText(sentence);
-  const checkIsToxic = checkToxicity(sentence);
-  setIsToxic(checkIsToxic);
+  
 }
 
 const checkToxicity = (text) => {
-  const threshold = 0.9;
-  toxicity.load(threshold).then(model => {  
-    model.classify([text]).then(predictions => {
-      let match = predictions[6].results[0].match;
-      setIsToxic(match);
-      return match
-    })
+  model.classify([text]).then(predictions => {
+    let match = predictions[6].results[0].match;
+    setIsToxic(match);
+    return match
   })
+  
 }
 
 const submit_text = () => {
 
   if(text.replace(/\s/g, '').length === 0) return
+
+  const checkIsToxic = checkToxicity(text);
+  setIsToxic(checkIsToxic);
+  if(checkIsToxic) return;
+
   let _text = addNewLine(text);
   socket.emit("submit_text", text);
   let data = {"from": "client", "message": _text};
