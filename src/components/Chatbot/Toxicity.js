@@ -11,7 +11,7 @@ const Chatbot = () => {
   const [ isToxic, setIsToxic ] = useState(true);
   const [text, setText ] = useState('');
   const [response, setResponse] = useState('Hello World!');
-  const [conversation, setConversation] = useState([{"from": "client", "message": "Hello! l;aksdj f;klajsd;lkfja sk;ldjf;lkasd jfk;lasdf"}, {"from": "server", "message": "Hello world! ajsk;dlfjask;ldfjaksldjf;klasjd;kflasd"}]);
+  const [conversation, setConversation] = useState([]);
 
   useEffect(() => {
     // ReactGA.initialize('UA-81850614-1');
@@ -23,6 +23,14 @@ const Chatbot = () => {
     // }
     // else {
     // }
+    socket.on('response', function(response) {
+      let new_data = addNewLine(response)
+      let data = {"from": "server", "message": new_data};
+      let newConversation = conversation;
+      newConversation.push(data);
+      setConversation(newConversation);
+    
+    })
   }, []);
 
   // const handleSubmitEmail = () => {
@@ -61,14 +69,8 @@ const checkToxicity = (text) => {
 }
 
 const submit_text = () => {
-  let t = text;
-  while (t.charAt(0) === ' ') {
-    t = t.substring(1);
-  }
 
-  const regex = /^[a-zA-Z0-9+_-]/;
-  if(!regex.test(t)) return;
-
+  if(text.replace(/\s/g, '').length === 0) return
   let _text = addNewLine(text);
   socket.emit("submit_text", text);
   let data = {"from": "client", "message": _text};
@@ -79,15 +81,7 @@ const submit_text = () => {
   setText('')
   document.getElementById("text").value = '';
 
-  socket.on('response', function(response) {
-    let new_data = addNewLine(response)
-    let data = {"from": "server", "message": new_data};
-    let newConversation = conversation;
-    newConversation.push(data);
-    setConversation(newConversation);
-    setResponse(new_data);
-    setPage(3);
-  })
+  
 }
 
 const addNewLine = (t) => {
